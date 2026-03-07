@@ -1,0 +1,95 @@
+import json
+import streamlit as st
+from dotenv import load_dotenv
+
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+# Load environment variables
+load_dotenv()
+
+st.title("AI LinkedIn Post Generator")
+
+# Load JSON prompt
+with open("prompt_12.json", "r") as file:
+    data = json.load(file)
+
+template = data["template"]
+
+# Prompt Template
+prompt = PromptTemplate(
+    input_variables=[
+        "topic",
+        "experience_level",
+        "tone",
+        "emoji_option",
+        "hook_optimizer",
+        "engagement_booster",
+        "viral_toggle"
+    ],
+    template=template
+)
+
+# -------- GEMINI MODEL --------
+model = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash-8b",
+    temperature=0.7
+)
+
+# Output parser
+parser = StrOutputParser()
+
+# LangChain chain
+chain = prompt | model | parser
+
+
+# ---------- Streamlit UI ----------
+
+topic = st.text_input("Topic")
+
+experience_level = st.selectbox(
+    "Experience Level",
+    ["Student", "Beginner", "Professional", "Expert", "Leader"]
+)
+
+tone = st.selectbox(
+    "Tone",
+    ["Professional", "Inspirational", "Educational", "Storytelling", "Thought Leadership"]
+)
+
+emoji_option = st.selectbox(
+    "Add Emojis",
+    ["Yes", "No"]
+)
+
+hook_optimizer = st.selectbox(
+    "Hook Optimizer",
+    ["ON", "OFF"]
+)
+
+engagement_booster = st.selectbox(
+    "Engagement Booster",
+    ["ON", "OFF"]
+)
+
+viral_toggle = st.selectbox(
+    "Make It Viral",
+    ["ON", "OFF"]
+)
+
+# Generate button
+if st.button("Generate Post"):
+
+    result = chain.invoke({
+        "topic": topic,
+        "experience_level": experience_level,
+        "tone": tone,
+        "emoji_option": emoji_option,
+        "hook_optimizer": hook_optimizer,
+        "engagement_booster": engagement_booster,
+        "viral_toggle": viral_toggle
+    })
+
+    st.subheader("Generated LinkedIn Post")
+    st.write(result)
