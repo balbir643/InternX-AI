@@ -35,7 +35,7 @@ prompt = PromptTemplate(
 
 # Load HuggingFace model
 endpoint = HuggingFaceEndpoint(
-    repo_id="Qwen/Qwen2.5-1.5B-Instruct",
+    repo_id="Qwen/Qwen2-1.5B-Instruct",
     task="text-generation"
 )
 
@@ -122,4 +122,5 @@ if st.button("Generate Post"):
             </div>
             """,
             unsafe_allow_html=True
+
         )
