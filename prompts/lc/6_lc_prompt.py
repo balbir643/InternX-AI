@@ -99,7 +99,7 @@ if st.button("Generate Post"):
                 "experience_level": experience_level,
                 "tone": tone,
                 "emoji_option": emoji_option,
-                "hook_optimizer": hook_optimizer,
+                "hook_optimizer": "ON",
                 "engagement_booster": engagement_booster,
                 "viral_toggle": viral_toggle
             })
@@ -124,5 +124,6 @@ if st.button("Generate Post"):
             unsafe_allow_html=True
 
         )
+
 
 
