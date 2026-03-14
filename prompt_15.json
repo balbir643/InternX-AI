@@ -1,0 +1,19 @@
+{
+    "name": null,
+    "input_variables": [
+        "p12",
+        "p3",
+        "p6",
+        "price_now",
+        "ticker"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\nYou are a senior financial market analyst.\n\nStock Symbol: {ticker}\nCurrent Price: ${price_now}\n\nPredicted Prices:\n3 Month: ${p3}\n6 Month: ${p6}\n12 Month: ${p12}\n\nProvide a professional investment analysis including:\n\n1. Market trend interpretation\n2. Short term outlook\n3. Medium term outlook\n4. Long term outlook\n5. Potential risks\n6. Investment recommendation (Buy / Hold / Sell)\n",
+    "template_format": "f-string",
+    "validate_template": false,
+    "_type": "prompt"
+}
